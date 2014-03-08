@@ -46,8 +46,8 @@ class twitterd:
         filename += ".jpg"
         if not os.path.exists(filename):
             os.system("$(which wget) --quiet -O" + filename + " " + tweet["user"]["profile_image_url"])
-            
-        TweetNotify=Notify.Notification.new (tweet["user"]["name"],tweet["text"] + ' <b>https://twitter.com/Someone/status/' + str(tweet["id"])+ '">Show Tweet</b>',filename)
+        tweetBody = tweet["text"] + ' - Link: <b>https://twitter.com/' + tweet["user"]["screen_name"] + '/status/' + str(tweet["id"])+ '</b>';
+        TweetNotify=Notify.Notification.new (tweet["user"]["name"],tweetBody,filename)
         TweetNotify.set_category("twitter.tweet")
         TweetNotify.show()
 
