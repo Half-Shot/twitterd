@@ -24,8 +24,11 @@ class twitterd:
         twitter = Twython(self.settings["app_key"], self.settings["app_secret"],self.settings["oauth_token"],self.settings["oauth_secret"])
         try:
             timeline = twitter.get_home_timeline(count=self.settings["tweets"])
-        except twython.exceptions.TwythonRateLimitError as e:
+        except twython.exceptions.TwythonRateLimitError:
             print("Too many requests :(")
+            return False
+        except:
+            print("Couldn't connect to the timeline for some reason.")
             return False
         for tweet in timeline:
             if tweet["id"] in self.settings["lastViewed"]:
