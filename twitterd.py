@@ -47,7 +47,7 @@ class twitterd:
         if not os.path.exists(filename):
             os.system("$(which wget) --quiet -O" + filename + " " + tweet["user"]["profile_image_url"])
             
-        TweetNotify=Notify.Notification.new (tweet["user"]["name"],tweet["text"] + " <b><a href='" + tweet["user"]["url"] + "'>Show Tweet</a></b>",filename)
+        TweetNotify=Notify.Notification.new (tweet["user"]["name"],tweet["text"] + ' <b>https://twitter.com/Someone/status/' + str(tweet["id"])+ '">Show Tweet</b>',filename)
         TweetNotify.set_category("twitter.tweet")
         TweetNotify.show()
 
